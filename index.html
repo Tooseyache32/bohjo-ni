@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AstroMap | Solar System</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <video class="video-bg" id="videoBg" autoplay muted loop playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="stars" id="stars"></div>
+
     <header class="header">
         <h1>AstroMap</h1>
         <p class="subtitle">Интерактивная карта космоса</p>
@@ -19,4 +27,7 @@
         <a href="index3.html" class="nav-link">О проекте</a>
     </nav>
 </body>
+<script src="js/script.js"></script>
+
+
 </html>
