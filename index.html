@@ -4,11 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AstroMap | Solar System</title>
+    <title>AstroMap</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="preloader" id="preloader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">ИНИЦИАЛИЗАЦИЯ КОСМОСА</div>
+        <div class="loader-percent" id="loaderPercent">0%</div>
+    </div>
+
     <video class="video-bg" id="videoBg" autoplay muted loop playsinline>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4" type="video/mp4">
     </video>
@@ -26,8 +32,8 @@
         <a href="#" class="nav-link">Контакты</a>
         <a href="index3.html" class="nav-link">О проекте</a>
     </nav>
-</body>
-<script src="js/script.js"></script>
 
+    <script src="script.js"></script>
+</body>
 
 </html>
