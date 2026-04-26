@@ -32,3 +32,21 @@ function createStars() {
 }
 
 createStars();
+
+const cursor = document.getElementById('cursor');
+const cursorDot = document.getElementById('cursorDot');
+const cursorGlow = document.getElementById('cursorGlow');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    cursorDot.style.left = e.clientX + 'px';
+    cursorDot.style.top = e.clientY + 'px';
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+});
+
+document.querySelectorAll('button, a, .planet, .sun, input, textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});

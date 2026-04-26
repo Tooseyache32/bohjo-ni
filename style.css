@@ -4,11 +4,17 @@
     box-sizing: border-box;
 }
 
+:root {
+    --cursor-size: 20px;
+    --cursor-hover-size: 40px;
+}
+
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: #000;
     color: #fff;
     overflow-x: hidden;
+    cursor: none;
     height: 100vh;
 }
 
@@ -99,6 +105,49 @@ body {
     pointer-events: none;
 }
 
+.cursor {
+    width: var(--cursor-size);
+    height: var(--cursor-size);
+    border: 2px solid #64ffda;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s, width 0.2s, height 0.2s, background 0.2s;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+
+.cursor.hover {
+    width: var(--cursor-hover-size);
+    height: var(--cursor-hover-size);
+    background: rgba(100, 255, 218, 0.2);
+    border-color: transparent;
+}
+
+.cursor-dot {
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-glow {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(100, 255, 218, 0.15), transparent 70%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: all 0.1s ease;
+    mix-blend-mode: screen;
+}
+
 .stars {
     position: fixed;
     top: 0;
@@ -129,6 +178,31 @@ body {
         transform: scale(1.2);
         box-shadow: 0 0 10px white;
     }
+}
+
+.nebula {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    z-index: -1;
+    transition: transform 0.1s ease-out;
+}
+
+.nebula-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.6), transparent);
+    top: -200px;
+    right: -100px;
+}
+
+.nebula-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 150, 255, 0.5), transparent);
+    bottom: -200px;
+    left: -100px;
 }
 
 .header {
@@ -179,6 +253,7 @@ body {
     transition: all 0.3s ease;
     position: relative;
     padding: 5px 0;
+    cursor: none;
 }
 
 .nav-link::after {
