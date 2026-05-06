@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AstroMap</title>
+    <title>AstroMap | Solar System</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="style.css">
+
+    <base target="_blank">
 </head>
 
 <body>
@@ -21,62 +24,113 @@
 
     <video class="video-bg" id="videoBg" autoplay muted loop playsinline>
         <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4" type="video/mp4">
+        <div
+            style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); z-index: -3;">
+        </div>
     </video>
     <div class="video-overlay"></div>
     <div class="stars" id="stars"></div>
     <div class="nebula nebula-1" id="nebula1"></div>
     <div class="nebula nebula-2" id="nebula2"></div>
+    <div class="ui-layer">
+        <header class="header">
+            <h1>AstroMap</h1>
+            <p class="subtitle">Интерактивная карта космоса</p>
+        </header>
 
-    <header class="header">
-        <h1>AstroMap</h1>
-        <p class="subtitle">Интерактивная карта космоса</p>
-    </header>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Солнечная система</a>
+            <a href="index2.html" class="nav-link">Галактики</a>
+            <a href="#" class="nav-link" onclick="toggleContact()">Контакты</a>
+            <a href="index3.html" class="nav-link">О проекте</a>
+        </nav>
 
-    <nav class="nav">
-        <a href="index.html" class="nav-link">Солнечная система</a>
-        <a href="index2.html" class="nav-link">Галактики</a>
-        <a href="#" class="nav-link">Контакты</a>
-        <a href="index3.html" class="nav-link">О проекте</a>
-    </nav>
+        <div class="solar-system" id="solarSystem">
+            <div class="sun" data-name="Солнце" data-type="Звезда" data-temp="5,500°C"
+                data-desc="Сверхмассивная звезда в центре системы"></div>
 
-    <div class="solar-system" id="solarSystem">
-        <div class="sun" data-name="Солнце" data-type="Звезда" data-temp="5,500°C"
-            data-desc="Сверхмассивная звезда в центре системы"></div>
-
-        <div class="orbit orbit-mercury" data-speed="4s">
-            <div class="planet mercury" data-name="Меркурий" data-type="Планета" data-temp="167°C"
-                data-desc="Ближайшая к Солнцу планета"></div>
-        </div>
-        <div class="orbit orbit-venus" data-speed="7s">
-            <div class="planet venus" data-name="Венера" data-type="Планета" data-temp="464°C"
-                data-desc="Самая горячая планета"></div>
-        </div>
-        <div class="orbit orbit-earth" data-speed="10s">
-            <div class="planet earth" data-name="Земля" data-type="Планета" data-temp="15°C" data-desc="Наш дом"></div>
-        </div>
-        <div class="orbit orbit-mars" data-speed="15s">
-            <div class="planet mars" data-name="Марс" data-type="Планета" data-temp="-65°C" data-desc="Красная планета">
+            <div class="orbit orbit-mercury" data-speed="4s">
+                <div class="planet mercury" data-name="Меркурий" data-type="Планета" data-temp="167°C"
+                    data-desc="Ближайшая к Солнцу планета"></div>
+            </div>
+            <div class="orbit orbit-venus" data-speed="7s">
+                <div class="planet venus" data-name="Венера" data-type="Планета" data-temp="464°C"
+                    data-desc="Самая горячая планета"></div>
+            </div>
+            <div class="orbit orbit-earth" data-speed="10s">
+                <div class="planet earth" data-name="Земля" data-type="Планета" data-temp="15°C" data-desc="Наш дом">
+                </div>
+            </div>
+            <div class="orbit orbit-mars" data-speed="15s">
+                <div class="planet mars" data-name="Марс" data-type="Планета" data-temp="-65°C"
+                    data-desc="Красная планета"></div>
+            </div>
+            <div class="orbit orbit-jupiter" data-speed="25s">
+                <div class="planet jupiter" data-name="Юпитер" data-type="Газовый гигант" data-temp="-110°C"
+                    data-desc="Крупнейшая планета"></div>
+            </div>
+            <div class="orbit orbit-saturn" data-speed="35s">
+                <div class="planet saturn" data-name="Сатурн" data-type="Газовый гигант" data-temp="-140°C"
+                    data-desc="Планета с кольцами"></div>
+            </div>
+            <div class="orbit orbit-uranus" data-speed="45s">
+                <div class="planet uranus" data-name="Уран" data-type="Ледяной гигант" data-temp="-195°C"
+                    data-desc="Вращается на боку"></div>
+            </div>
+            <div class="orbit orbit-neptune" data-speed="55s">
+                <div class="planet neptune" data-name="Нептун" data-type="Ледяной гигант" data-temp="-200°C"
+                    data-desc="Самый ветреный мир"></div>
             </div>
         </div>
-        <div class="orbit orbit-jupiter" data-speed="25s">
-            <div class="planet jupiter" data-name="Юпитер" data-type="Газовый гигант" data-temp="-110°C"
-                data-desc="Крупнейшая планета"></div>
+
+        <div class="controls">
+            <button class="control-btn" id="resetBtn" title="Сброс (R)">⌂</button>
+            <button class="control-btn" id="pauseBtn" title="Пауза (Пробел)">⏸</button>
+            <button class="control-btn" id="zoomIn" title="Приблизить (+)">+</button>
+            <button class="control-btn" id="zoomOut" title="Отдалить (-)">−</button>
         </div>
-        <div class="orbit orbit-saturn" data-speed="35s">
-            <div class="planet saturn" data-name="Сатурн" data-type="Газовый гигант" data-temp="-140°C"
-                data-desc="Планета с кольцами"></div>
+
+        <div class="speed-indicator">
+            <span
+                style="color: #64ffda; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Скорость</span>
+            <input type="range" class="speed-slider" id="speedSlider" min="0" max="300" value="100">
         </div>
-        <div class="orbit orbit-uranus" data-speed="45s">
-            <div class="planet uranus" data-name="Уран" data-type="Ледяной гигант" data-temp="-195°C"
-                data-desc="Вращается на боку"></div>
-        </div>
-        <div class="orbit orbit-neptune" data-speed="55s">
-            <div class="planet neptune" data-name="Нептун" data-type="Ледяной гигант" data-temp="-200°C"
-                data-desc="Самый ветреный мир"></div>
+
+
+        <button class="contact-toggle" id="contactToggle" onclick="toggleContact()">✉</button>
+        <div class="contact-section" id="contactSection">
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="nameInput" placeholder="Имя" required oninput="updateProgress()">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="emailInput" placeholder="Email" required oninput="updateProgress()">
+                </div>
+                <div class="form-group">
+                    <textarea id="msgInput" rows="3" placeholder="Сообщение" required
+                        oninput="updateProgress()"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Отправить</button>
+            </form>
         </div>
     </div>
 
-    <script src="script.js"></script>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <h2 class="modal-title" id="modalTitle">Планета</h2>
+            <div id="canvas-container"></div>
+            <div class="modal-info" id="modalInfo"></div>
+        </div>
+    </div>
+
+    <script src="script.js">
+
+    </script>
 </body>
 
 </html>

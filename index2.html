@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroMap | Галактики</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="index2.css">
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">ЗАГРУЗКА ГАЛАКТИК</div>
+        <div class="loader-percent" id="loaderPercent">0%</div>
+    </div>
+    <div class="progress-top" id="progressTop"></div>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <video class="video-bg" id="videoBg" autoplay muted loop playsinline>
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="stars-field" id="stars"></div>
+    <div class="nebula-float nebula-1" id="nebula1"></div>
+    <div class="nebula-float nebula-2" id="nebula2"></div>
+    <div class="nebula-float nebula-3" id="nebula3"></div>
+
+    <header>
+        <div class="logo-section">
+            <h1>AstroMap</h1>
+            <p>Исследуй Вселенную</p>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Солнечная система</a>
+            <a href="index2.html" style="color: #64ffda;">Галактики</a>
+            <a href="index3.html" onclick="showFavorites()">Избранное (<span id="favCount">0</span>)</a>
+            <a href="#">О проекте</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-title">
+            <h2>Галактики</h2>
+            <p>Исследуйте различные типы галактик во Вселенной</p>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="spiral">Спиральные</button>
+            <button class="filter-btn" data-filter="elliptical">Эллиптические</button>
+            <button class="filter-btn" data-filter="irregular">Неправильные</button>
+            <button class="filter-btn" data-filter="ring">Кольцевые</button>
+        </div>
+
+        <div class="galaxies-grid" id="galaxiesGrid"></div>
+    </main>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <h2 class="modal-title" id="modalTitle">Галактика</h2>
+            <div id="canvas-container"></div>
+            <div class="info-grid" id="modalInfo"></div>
+            <div class="modal-description" id="modalDesc"></div>
+        </div>
+    </div>
+
+    <script src="index2.js"></script>
+</body>
+
+</html>
