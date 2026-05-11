@@ -271,11 +271,38 @@ if (savedForm) {
 
 document.getElementById('contactForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Сообщение отправлено! (Демо)');
-    localStorage.removeItem('contactForm');
-    document.getElementById('contactForm').reset();
-    updateProgress();
+
+    const submitBtn = e.target.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Отправка...';
+    submitBtn.disabled = true;
+
+    const formData = {
+        name: document.getElementById('nameInput').value,
+        email: document.getElementById('emailInput').value,
+        message: document.getElementById('msgInput').value
+    };
+
+    emailjs.send('service_52psn9m', 'template_5zrjr9x', {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message
+    })
+        .then(function () {
+            alert('Сообщение успешно отправлено!');
+            localStorage.removeItem('contactForm');
+            document.getElementById('contactForm').reset();
+            updateProgress();
+        }, function (error) {
+            console.error('Ошибка отправки:', error);
+            alert('Ошибка отправки. Попробуйте позже.');
+        })
+        .finally(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
 });
+
 
 function toggleContact() {
     document.getElementById('contactSection').classList.toggle('visible');

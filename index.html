@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AstroMap | Solar System</title>
+    <title>AstroMap</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="style.css">
 
@@ -128,9 +128,13 @@
         </div>
     </div>
 
-    <script src="script.js">
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("-PuGhNfCD-s0wjV0-");
+        })();
     </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

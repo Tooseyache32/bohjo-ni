@@ -741,7 +741,19 @@ main {
     }
 }
 
-/* Стили для формы обратной связи */
+main {
+    padding: 20px;
+}
+
+.galaxies-grid {
+    grid-template-columns: 1fr;
+}
+
+.page-title h2 {
+    font-size: 2rem;
+}
+
+
 .feedback-section {
     padding: 80px 60px;
     background: rgba(0, 0, 0, 0.6);
@@ -869,3 +881,5 @@ main {
         padding: 60px 20px;
     }
 }
+
+emailjs.init("твой_PUBLIC_KEY");
